@@ -1,0 +1,106 @@
+
+Discarded input sections
+
+ .group         0x00000000        0x8 kernel_main.o
+ .group         0x00000000        0x8 KEE.o
+ .text.__x86.get_pc_thunk.ax
+                0x00000000        0x4 KEE.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00100000                        . = 0x100000
+
+.multiboot      0x00100000        0xc
+ *(.multiboot)
+ .multiboot     0x00100000        0xc entrypoint.o
+
+.text           0x00100010       0xed
+ *(.text*)
+ .text          0x00100010        0x8 entrypoint.o
+                0x00100010                _start
+ *fill*         0x00100018        0x8 
+ .text          0x00100020       0x22 boot.o
+                0x00100020                _boot
+ *fill*         0x00100042        0xe 
+ .text          0x00100050        0xb stack.o
+                0x00100050                setup_stack
+ *fill*         0x0010005b        0x5 
+ .text          0x00100060        0x1 constants.o
+                0x00100060                setup_color
+ .text          0x00100061       0x87 kernel_main.o
+                0x00100061                kernel_main
+ .text.__x86.get_pc_thunk.ax
+                0x001000e8        0x4 kernel_main.o
+                0x001000e8                __x86.get_pc_thunk.ax
+ .text          0x001000ec       0x11 KEE.o
+                0x001000ec                kernel_early_exit
+
+.iplt           0x001000fd        0x0
+ .iplt          0x001000fd        0x0 entrypoint.o
+
+.rodata         0x00100100       0x28
+ *(.rodata*)
+ .rodata        0x00100100        0x8 constants.o
+                0x00100100                monochrome_vga
+                0x00100104                vga
+ .rodata        0x00100108       0x20 kernel_main.o
+
+.eh_frame       0x00100128       0x64
+ .eh_frame      0x00100128       0x48 kernel_main.o
+ .eh_frame      0x00100170       0x1c KEE.o
+                                 0x48 (size before relaxing)
+
+.rel.dyn        0x0010018c        0x0
+ .rel.got       0x0010018c        0x0 entrypoint.o
+ .rel.iplt      0x0010018c        0x0 entrypoint.o
+
+.data           0x0010018c        0x0
+ *(.data*)
+ .data          0x0010018c        0x0 kernel_main.o
+ .data          0x0010018c        0x0 KEE.o
+
+.got            0x0010018c        0x0
+ .got           0x0010018c        0x0 entrypoint.o
+
+.got.plt        0x0010018c        0xc
+ .got.plt       0x0010018c        0xc entrypoint.o
+                0x0010018c                _GLOBAL_OFFSET_TABLE_
+
+.igot.plt       0x00100198        0x0
+ .igot.plt      0x00100198        0x0 entrypoint.o
+
+.stack          0x001001a0     0x8000
+ *(.stack)
+ .stack         0x001001a0     0x8000 stack.o
+                0x001081a0                stack_top
+
+.bss            0x001081a0        0x0
+ *(.bss*)
+ .bss           0x001081a0        0x0 kernel_main.o
+ .bss           0x001081a0        0x0 KEE.o
+ *(COMMON)
+LOAD entrypoint.o
+LOAD boot.o
+LOAD stack.o
+LOAD constants.o
+LOAD kernel_main.o
+LOAD KEE.o
+OUTPUT(iso/boot/kernel.elf elf32-i386)
+
+.comment        0x00000000       0x1e
+ .comment       0x00000000       0x1e kernel_main.o
+                                 0x1f (size before relaxing)
+ .comment       0x0000001e        0x0 KEE.o
+                                 0x1f (size before relaxing)
+
+.note.GNU-stack
+                0x00000000        0x0
+ .note.GNU-stack
+                0x00000000        0x0 kernel_main.o
+ .note.GNU-stack
+                0x00000000        0x0 KEE.o

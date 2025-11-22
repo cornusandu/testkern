@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+rm -rf ./*.o
+rm -rf ./src/*.o
+rm -rf ./*.elf
+rm -rf ./*.iso
