@@ -13,6 +13,7 @@ jobs:
 
       - name: Build coderabbit
         run: |
+          apt install nasm
           chmod +x ./build.sh
           ./build.sh
 
