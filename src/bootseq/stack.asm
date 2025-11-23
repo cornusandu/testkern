@@ -8,7 +8,7 @@ stack_bottom:
 section .text
 global setup_stack
 setup_stack:
-    mov esp, stack_top
+    mov esp, stack_bottom
     and esp, 0xFFFFFFF0   ; 16-byte align
     xor ebp, ebp
     ret
