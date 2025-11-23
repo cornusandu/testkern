@@ -11,6 +11,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Build coderabbit
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
+
       - name: Run mkdump
         run: |
           chmod +x ./mkdump
