@@ -4,20 +4,20 @@ _boot:
     extern setup_stack
     call setup_stack
 
-    ; 1. Mask ALL legacy PIC interrupts (this is the missing line)
-    mov al, 0x34          ; disable speaker + set channel 0 to mode 2
-    out 0x43, al
-    xor al, al
-    out 0x40, al          ; timer divisor = 0 → timer stops
-    out 0x40, al
+    ; Mask all interrupts on both PICs
+    mov al, 0xFF
+    out 0x21, al    ; Master PIC data port
+    out 0xA1, al    ; Slave PIC data port
 
-    ; 2. Switch to text mode
+    ; Switch to text mode
     jmp skip_text  ; Temporarily disabled
 
     ;mov ax, 0x0003  ; Commented for testing
     ;int 0x10
 
     skip_text:
+
+    cli
 
     extern kernel_main
     call kernel_main
@@ -29,7 +29,7 @@ _boot:
     extern kernel_early_exit
     call kernel_early_exit
 .done:
-    cli
+    jmp .hang
 .hang:
     hlt
     jmp .hang
