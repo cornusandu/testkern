@@ -31,6 +31,7 @@ _boot:
 .is_greater:
     extern kernel_early_exit
     call kernel_early_exit
+    jmp .hang
 .done:
     jmp .hang
 .hang:

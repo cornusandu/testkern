@@ -16,5 +16,15 @@ extern "C" void kernel_main()
 
     kstd::aprintk("Test!");    
 
-    for (;;) asm volatile ("hlt");
-}
+    //for (;;) asm volatile ("hlt");
+
+    asm volatile(
+        "mov $0x1013, %%eax\n\t"
+        "ret"
+        :
+        :
+        :"%eax"
+    );
+
+    __builtin_unreachable();
+};
