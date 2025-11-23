@@ -7,6 +7,7 @@ section .multiboot
 section .text
     global _start
 _start:
+    cli
     extern _boot
     call _boot
 .hang:

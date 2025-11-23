@@ -17,7 +17,7 @@ _boot:
 
     skip_text:
 
-    cli
+    ;cli  ; Moved to entrypoint.asm
 
     extern kernel_main
     call kernel_main

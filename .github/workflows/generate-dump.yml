@@ -1,0 +1,23 @@
+name: Generate Dump for CodeRabbit
+
+on:
+  pull_request:
+
+jobs:
+  generate-dump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Run mkdump
+        run: |
+          chmod +x ./mkdump
+          ./mkdump        # this must generate ./dmp/
+
+      - name: Upload dump directory for CodeRabbit
+        uses: actions/upload-artifact@v4
+        with:
+          name: coderabbit-dump
+          path: dmp/
