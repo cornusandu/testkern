@@ -2,15 +2,19 @@
 
 void __printk();
 
+extern int vga_mem_offset;
+
 // TODO: Fix this.
 [[noreturn]] void kernel_early_exit() {
-    char *p = "The kernel has exited early with a non-zero exit code.";
+    //vga_mem_offset = 0;   // CAUSES INFINITE REBOOT LOOP
+
+    char *p = "The kernel has exited early with a non-zero exit code.\0\0";
     asm volatile(
         "mov %0, %%edi\n\t"
         "mov %1, %%esi\n\t"
         "call __printk\n\t"
         :
-        :"r"(p),"r"(54)
+        :"r"(p),"r"(56)
         :"%edi","%esi","%eax","%ebx","memory"
     );
 

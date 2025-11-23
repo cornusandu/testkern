@@ -1,4 +1,5 @@
 section .data
+    global vga_mem_offset
     vga_mem_offset: dd 0
 
 section .text
