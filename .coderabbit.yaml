@@ -1,2 +1,17 @@
 custom_files:
   - dmp/**
+
+custom_rules:
+  - id: linking-diagnostics
+    description: >
+      When reviewing a pull request and the build log indicates linking errors
+      (e.g., undefined references, missing symbols, unresolved externals), use
+      all files under dmp/** as supplemental information. These files contain
+      symbol tables and related metadata produced during the CI build.
+    triggers:
+      - pattern: "undefined reference"
+      - pattern: "unresolved"
+      - pattern: "ld:"
+    actions:
+      - use_custom_files:
+          - dmp/**
