@@ -12,8 +12,12 @@ _boot:
     out 0x40, al
 
     ; 2. Switch to text mode
-    mov ax, 0x0003
-    int 0x10
+    jmp skip_text  ; Temporarily disabled
+
+    ;mov ax, 0x0003  ; Commented for testing
+    ;int 0x10
+
+    skip_text:
 
     extern kernel_main
     call kernel_main
