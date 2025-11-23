@@ -2,4 +2,6 @@
 rm -rf ./*.o
 rm -rf ./src/*.o
 rm -rf ./*.elf
+rm -rf ./iso/boot/kernel.elf
 rm -rf ./*.iso
+rm -rf ./dmp

@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+
+mkdir -p ./dmp
+
+for i in $(find . -name "*.o"); do
+    echo $(nm $i) > ./dmp/$i.nm
+done
