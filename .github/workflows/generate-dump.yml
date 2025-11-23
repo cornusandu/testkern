@@ -13,7 +13,7 @@ jobs:
 
       - name: Build binaries
         run: |
-          apt install nasm
+          sudo apt install nasm
           chmod +x ./build.sh
           ./build.sh
 
