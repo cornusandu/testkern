@@ -1,0 +1,1 @@
+00000000 T _boot U kernel_early_exit U kernel_main 00000013 t skip_text 00000028 t skip_text.done 0000002a t skip_text.hang 00000021 t skip_text.is_greater U stack_bottom

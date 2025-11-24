@@ -1,4 +1,4 @@
-section .data
+section .stack
 align 16
 global stack_top
 stack_top:
