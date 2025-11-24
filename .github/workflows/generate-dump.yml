@@ -11,13 +11,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install GCC 13 toolchain
+      - name: Install toolchain
         run: |
           sudo apt update
           sudo apt install -y gcc-13 g++-13 libstdc++-13-dev nasm
-
-          echo "CC=gcc-13"  >> $GITHUB_ENV
-          echo "CXX=g++-13" >> $GITHUB_ENV
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
 
       - name: Build binaries
         run: |
