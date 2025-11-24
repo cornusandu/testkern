@@ -1,0 +1,1 @@
+00000000 T __printk 00000029 t __printk.done 00000005 t __printk.loop U vga 00000000 D vga_mem_offset

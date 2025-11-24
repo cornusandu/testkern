@@ -1,6 +1,25 @@
 // kernel_early_exit
 
+#include <stdint.h>
+
+void __printk();
+
+extern int vga_mem_offset;
+
+// TODO: Fix this.
 [[noreturn]] void kernel_early_exit() {
+    vga_mem_offset = 0;
+
+    char *p = "The kernel has exited early with a non-zero exit code..\0\0";
+    asm volatile(
+        "mov %0, %%edi\n\t"
+        "mov %1, %%esi\n\t"
+        "call __printk\n\t"
+        :
+        :"r"(p),"r"(56)
+        :"%edi","%esi","%eax","%ebx","memory"
+    );
+
     asm volatile(
         "cli\n\t"
         "1:\n\t"
