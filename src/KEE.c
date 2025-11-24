@@ -6,7 +6,7 @@ extern int vga_mem_offset;
 
 // TODO: Fix this.
 [[noreturn]] void kernel_early_exit() {
-    asm volatile("mov $0, [vga_mem_offset]" :::"memory");
+    asm volatile("movl $0, vga_mem_offset" ::: "memory");
 
     char *p = "The kernel has exited early with a non-zero exit code..\0\0";
     asm volatile(
