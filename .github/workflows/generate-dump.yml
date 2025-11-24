@@ -11,17 +11,23 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Install GCC 13 toolchain
+        run: |
+          sudo apt update
+          sudo apt install -y gcc-13 g++-13 libstdc++-13-dev nasm
+
+          echo "CC=gcc-13"  >> $GITHUB_ENV
+          echo "CXX=g++-13" >> $GITHUB_ENV
+
       - name: Build binaries
         run: |
-          sudo apt install build-essential libstdc++-13-dev
-          sudo apt install nasm
           chmod +x ./build.sh
           ./build.sh
 
       - name: Run mkdump
         run: |
           chmod +x ./mkdump
-          ./mkdump        # this must generate ./dmp/
+          ./mkdump
 
       - name: Upload dump directory for CodeRabbit
         uses: actions/upload-artifact@v4
