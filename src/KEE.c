@@ -6,7 +6,7 @@ extern int vga_mem_offset;
 
 // TODO: Fix this.
 [[noreturn]] void kernel_early_exit() {
-    //vga_mem_offset = 0;   // CAUSES INFINITE REBOOT LOOP
+    vga_mem_offset = 0;   // CAUSES INFINITE REBOOT LOOP
 
     char *p = "The kernel has exited early with a non-zero exit code.\0\0";
     asm volatile(
