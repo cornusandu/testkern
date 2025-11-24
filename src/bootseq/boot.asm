@@ -25,9 +25,9 @@ _boot:
     extern kernel_main
     call kernel_main
 
-    cmp eax, 0x1012
+    cmp eax, 0x1012  ; Current standard exit code. Can be replaced later
     jne .is_greater
-    je .done
+    jmp .done
 .is_greater:
     extern kernel_early_exit
     call kernel_early_exit

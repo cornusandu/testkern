@@ -14,17 +14,14 @@ extern "C" void kernel_main()
 
     kstd::clearscrk();
 
-    kstd::aprintk("Test!");    
-
-    //for (;;) asm volatile ("hlt");
+    kstd::aprintk("Test!");
 
     asm volatile(
-        "mov $0x1013, %%eax\n\t"
-        "ret"
+        "mov $0x1012, %%eax\n\t"
         :
         :
         :"%eax"
     );
 
-    __builtin_unreachable();
+    return;
 };

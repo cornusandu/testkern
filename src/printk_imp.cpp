@@ -1,6 +1,7 @@
 #include "../include/printk.hpp"
 #include "../include/constants.h"
 #include "../include/strlen.hpp"
+#include <cstdint>
 
 void kstd::printk(char* msg, uint32_t len) {
     asm volatile(
@@ -13,10 +14,13 @@ void kstd::printk(char* msg, uint32_t len) {
     );
 }
 
+extern "C" uint32_t vga_mem_offset;
+
 void kstd::clearscrk() {
     for (int i = 0; i < 80*25; i++) {
         ((uint16_t*)vga)[i] = 0x0F20;  // white space on black
     }
+    vga_mem_offset = 0;
 }
 
 void kstd::aprintk(char* msg) {
