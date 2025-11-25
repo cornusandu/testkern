@@ -1,7 +1,5 @@
 #!/usr/bin/sh
-rm -rf ./*.o
-rm -rf ./src/*.o
-rm -rf ./*.elf
-rm -rf ./iso/boot/kernel.elf
-rm -rf ./*.iso
+rm -rf $(find . -name "*.o")
+rm -rf $(find . -name "*.elf")
+rm -rf $(find . -name "*.iso")
 rm -rf $@
