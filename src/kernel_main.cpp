@@ -4,14 +4,6 @@
 
 extern "C" void kernel_main()
 {
-    // Clear screen
-    //volatile uint16_t* vga = (volatile uint16_t*)0xB8000;
-    
-
-    //const char* msg = "Hello, World! It finally works!";
-    //for (int i = 0; msg[i]; i++)
-    //    vga[i] = 0x0F00 | msg[i];
-
     kstd::clearscrk();
 
     kstd::aprintk("Test!");
