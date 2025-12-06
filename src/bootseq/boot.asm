@@ -1,5 +1,6 @@
 section .text
 global _boot
+align 16
 _boot:
     ; Set up stack
     extern stack_bottom

@@ -6,7 +6,7 @@ section .multiboot
 
 section .text
     global _start
-
+align 32
 _start:
     cli
     extern _boot
